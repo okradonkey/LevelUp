@@ -2,33 +2,34 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFrameworks>net35;net472</TargetFrameworks>
     <LangVersion>preview</LangVersion>
-    <OutputPath>1.1/Assemblies</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <DebugType>none</DebugType>
-    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(Configuration) == Debug">
-    <DefineConstants>DEBUG</DefineConstants>
+  <PropertyGroup Condition="$(TargetFramework) == net35">
+    <OutputPath>Assemblies</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework) == net472">
+    <OutputPath>1.1/Assemblies</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(Configuration) == Release">
     <Optimize>true</Optimize>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Source\ModHandler.cs" />
-    <Compile Remove="Source\Settings\Settings.cs" />
-    <Compile Remove="Source\Start.cs" />
+  <ItemGroup Condition="$(TargetFramework) == net35">
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.0.*" />
+    <PackageReference Include="Lib.Harmony" Version="1.2.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="$(TargetFramework) == net472">
     <PackageReference Include="Krafs.Rimworld.Ref" Version="1.1.*" />
     <PackageReference Include="Lib.Harmony" Version="2.0.0.*">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
-
 </Project>

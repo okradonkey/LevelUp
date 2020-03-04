@@ -1,33 +1,22 @@
-﻿using UnityEngine;
-using Verse;
+﻿using Verse;
 
 namespace LevelUp
 {
     public class AnimationWorker_RedBubble : AnimationWorker
     {
-        private ThingDef moteLevelDownDef;
-        private ThingDef MoteLevelDownDef => moteLevelDownDef ??= DefDatabase<ThingDef>.GetNamed("Mote_LevelDown");
-
-        //public override void Execute(Pawn pawn)
-        //{
-        //    var mote = ThingMaker.MakeThing(MoteLevelDownDef) as Mote;
-        //    mote.Scale = 8.0f;
-        //    mote.rotationRate = -100f;
-        //    var position = pawn.DrawPos;
-        //    mote.Attach(pawn);
-        //    mote.exactPosition = position;
-
-        //    GenSpawn.Spawn(mote, position.ToIntVec3(), Find.CurrentMap);
-        //}
+        // GET THIS FROM DEF INSTEAD
+        private ThingDef moteLevelDownDef => DefDatabase<ThingDef>.GetNamed("Mote_LevelDown");
 
         public override void Execute(TargetInfo target)
         {
-            throw new System.NotImplementedException();
-        }
+            var mote = ThingMaker.MakeThing(moteLevelDownDef) as Mote;
+            mote.Scale = 1.0f;
+            mote.rotationRate = 100f;
+            var position = target; // ??
+            mote.Attach(target);
+            mote.exactPosition = target.CenterVector3;
 
-        //public override void Execute(Vector3 location)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
+            GenSpawn.Spawn(mote, target.CenterVector3.ToIntVec3(), Find.CurrentMap);
+        }
     }
 }

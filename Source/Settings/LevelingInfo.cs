@@ -2,6 +2,7 @@
 
 namespace LevelUp
 {
+    // MAKE INTO ONE NON ABSTRACT CLASS AND DEFINE DEFAULTS IN GAMEHANDLER INSTEAD.
     public abstract class LevelingInfo : IExposable
     {
         private bool active;

@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -7,7 +6,9 @@ namespace LevelUp
 {
     public class GameHandler : GameComponent
     {
-        // TUrn into properties
+        public static HarmonyPatcher harmonyPatcher;
+
+        // Turn into properties
         public LevelingInfo LevelUpInfo;
 
         public LevelingInfo LevelDownInfo;
@@ -40,11 +41,22 @@ namespace LevelUp
 
             var pawnSkillTimerCache = new PawnSkillTimerCache(25, this);
             LevelEventMaker = new LevelEventMaker(pawnSkillTimerCache, this);
-
-            SkillRecordLearnPatch.InitializePatch(new Harmony("Krafs.LevelUp"));
+            
+            if (harmonyPatcher is null)
+            {
+                
+                harmonyPatcher = new HarmonyPatcher("Krafs.LevelUp");
+                SkillRecordLearnPatch.InitializePatch(harmonyPatcher);
+            }
+            else
+            {
+                
+                SkillRecordLearnPatch.ReApplyPatch();
+            }
         }
 
         public LevelEventMaker LevelEventMaker { get; private set; }
+#if DEBUG
 
         public override void GameComponentOnGUI()
         {
@@ -72,4 +84,6 @@ namespace LevelUp
             }
         }
     }
+
+#endif
 }

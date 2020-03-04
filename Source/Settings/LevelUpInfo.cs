@@ -9,8 +9,7 @@ namespace LevelUp
             Sound = DefDatabase<LevelSoundDef>.GetNamed("KrafsLevelUpDing");
             Animation = DefDatabase<AnimationDef>.GetNamed("KrafsLevelUpAnimationBrightBubble");
             Message = DefDatabase<MessageDef>.GetNamed("KrafsLevelUpMessageTopLeftSimple");
-            MessageText = "Krafs.LevelUp.LevelUpMessage".TranslateSimple();
-
+            MessageText = I18n.Translate("Krafs.LevelUp.LevelUpMessage");
         }
     }
 }

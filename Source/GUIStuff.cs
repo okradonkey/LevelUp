@@ -4,7 +4,7 @@ using Verse;
 namespace LevelUp
 {
     [StaticConstructorOnStartup]
-    public static class Textures
+    public static class GUIStuff
     {
         public readonly static Texture2D SoundOnIcon = ContentFinder<Texture2D>.Get("SoundOnIcon");
         public readonly static Texture2D SoundOffIcon = ContentFinder<Texture2D>.Get("SoundOffIcon");
@@ -13,5 +13,7 @@ namespace LevelUp
         public readonly static Texture2D NoteIcon = ContentFinder<Texture2D>.Get("NoteIcon");
         public readonly static Texture2D AnimationIcon = ContentFinder<Texture2D>.Get("AnimationIcon");
         public readonly static Texture2D SaveIcon = ContentFinder<Texture2D>.Get("SaveIcon");
+
+        public readonly static Color PawnName = GenColor.FromHex("d09b61");
     }
 }
