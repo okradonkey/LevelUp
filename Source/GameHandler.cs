@@ -20,13 +20,35 @@ namespace LevelUp
 
         public override void ExposeData()
         {
+            //Log.Message("ExposeData");
+
+            // ONLY GETS DEFAULT VALUE IF GAME IS LOADED.
             Scribe_Values.Look(ref LevelIntervalSeconds, nameof(LevelIntervalSeconds), 20);
             Scribe_Deep.Look(ref LevelUpInfo, nameof(LevelUpInfo));
             Scribe_Deep.Look(ref LevelDownInfo, nameof(LevelDownInfo));
         }
 
+        public override void StartedNewGame()
+        {
+            //Log.Message("StartedNewGame");
+            // PUT LOADED FILES HERE?
+        }
+
+        public override void LoadedGame()
+        {
+            //Log.Message("LoadedGame");
+            
+            // ORDER
+            //   FINALIZEINIT
+            //   EXPOSEDATA (IF LOADING)
+            //   STARTEDNEWGAME / LOADEDGAME
+            //
+        }
+
         public override void FinalizeInit()
         {
+            //Log.Message("FinalizeInit");
+            
             if (LevelUpInfo is null)
             {
                 LevelUpInfo = new LevelUpInfo();
@@ -82,7 +104,11 @@ namespace LevelUp
             {
                 Find.WindowStack.Add(new LevelManagerWindow());
             }
+
+            Widgets.Label(new Rect(20f, 110f, 250f, 24f), "Timer value: " + LevelIntervalSeconds);
         }
+
+
     }
 
 #endif
