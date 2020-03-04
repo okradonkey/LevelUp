@@ -4,12 +4,12 @@
   <!-- A pawn has leveled up -->
   <MessageTypeDef>
     <defName>MessageLevelUp</defName>
-    <sound>LevelUpDing</sound>
+    <sound>KrafsLevelUpDing</sound>
   </MessageTypeDef>
 
   <!-- A pawn has leveled down -->
   <MessageTypeDef>
     <defName>MessageLevelDown</defName>
-    <sound>LevelDownDrop</sound>
+    <sound>KrafsLevelUpDrop</sound>
   </MessageTypeDef>
 </Defs>

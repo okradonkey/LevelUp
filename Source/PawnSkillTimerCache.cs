@@ -7,12 +7,13 @@ namespace LevelUp
 {
     public class PawnSkillTimerCache
     {
-        public const int MinSecondsBetweenLevels = 20;
         private readonly Dictionary<ValueTuple<Pawn, SkillDef>, DateTime> timerCache;
+        private readonly GameHandler gameHandler;
 
-        public PawnSkillTimerCache(int capacity)
+        public PawnSkillTimerCache(int capacity, GameHandler gameHandler)
         {
             this.timerCache = new Dictionary<ValueTuple<Pawn, SkillDef>, DateTime>(capacity);
+            this.gameHandler = gameHandler;
         }
 
         public bool EnoughTimeHasPassed(Pawn pawn, SkillDef skillDef)
@@ -25,7 +26,7 @@ namespace LevelUp
                 return false;
             }
 
-            timerCache[key] = currentDateTime.AddSeconds(MinSecondsBetweenLevels);
+            timerCache[key] = currentDateTime.AddSeconds(gameHandler.LevelIntervalSeconds);
             return true;
         }
     }

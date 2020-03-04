@@ -19,8 +19,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.1.2559" />
-    <PackageReference Include="Lib.Harmony" Version="2.0.0.8">
+    <Compile Remove="Source\ModHandler.cs" />
+    <Compile Remove="Source\Settings\Settings.cs" />
+    <Compile Remove="Source\Start.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.1.*" />
+    <PackageReference Include="Lib.Harmony" Version="2.0.0.*">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>

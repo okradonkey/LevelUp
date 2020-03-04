@@ -1,7 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Defs>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
 
-	<SoundDef>
-		<defName>LevelUpDing</defName>
+  <LevelUp.LevelSoundDef Name="LevelSoundBase" Abstract="True">
+  </LevelUp.LevelSoundDef>
+
+  <LevelUp.LevelSoundDef ParentName="LevelSoundBase">
+		<defName>KrafsLevelUpDing</defName>
+    <label>Ding</label>
 		<subSounds>
 			<li>
         <onCamera>true</onCamera>
@@ -10,16 +15,13 @@
 						<clipPath>ding</clipPath>
 					</li>
 				</grains>
-        <volumeRange>
-					<min>20</min>
-					<max>20</max>
-				</volumeRange>
-			</li>
+      </li>
 		</subSounds>
-	</SoundDef>
+	</LevelUp.LevelSoundDef>
 
-  <SoundDef>
-    <defName>LevelDownDrop</defName>
+  <LevelUp.LevelSoundDef ParentName="LevelSoundBase">
+    <defName>KrafsLevelUpDrop</defName>
+    <label>Drop</label>
     <subSounds>
       <li>
         <onCamera>true</onCamera>
@@ -30,5 +32,5 @@
         </grains>
       </li>
     </subSounds>
-  </SoundDef>
+  </LevelUp.LevelSoundDef>
 </Defs>

@@ -13,8 +13,6 @@ namespace LevelUp
 
         private static MethodBase levelEventMakerGetter;
 
-        private static Settings modSettings;
-
         private static MethodBase onLevelDown;
 
         private static MethodBase onLevelUp;
@@ -29,12 +27,10 @@ namespace LevelUp
         private static MethodBase OnLevelUp => onLevelUp ??=
             SymbolExtensions.GetMethodInfo(() => LevelEventMaker.OnLevelUp(default, default, default));
 
-        private static LevelEventMaker LevelEventMaker { get; set; }
+        private static LevelEventMaker LevelEventMaker => Current.Game.GetComponent<GameHandler>().LevelEventMaker;
 
         private static MethodBase LevelEventMakerGetter => levelEventMakerGetter ??=
             AccessTools.PropertyGetter(typeof(SkillRecordLearnPatch), nameof(LevelEventMaker));
-
-        private static Settings ModSettings => modSettings ??= LoadedModManager.GetMod<ModHandler>().GetSettings<Settings>();
 
         private static FieldInfo SkillRecordLevelInt => skillRecordLevelInt ??=
             typeof(SkillRecord).GetField(nameof(SkillRecord.levelInt));
@@ -42,9 +38,8 @@ namespace LevelUp
         private static FieldInfo SkillRecordPawn => skillRecordPawn ??=
             typeof(SkillRecord).GetField("pawn", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        public static void InitializePatch(Harmony harmony, LevelEventMaker levelEventMaker)
+        public static void InitializePatch(Harmony harmony)
         {
-            LevelEventMaker = levelEventMaker;
             var original = typeof(SkillRecord).GetMethod(nameof(SkillRecord.Learn));
 
             if (!Harmony.HasAnyPatches(harmony.Id))
@@ -61,6 +56,8 @@ namespace LevelUp
 
         public static IEnumerable<CodeInstruction> LearnTranspilerPatch(IEnumerable<CodeInstruction> instructions)
         {
+            var gameHandler = Current.Game.GetComponent<GameHandler>();
+
             CodeInstruction previousInstruction = default;
 
             foreach (var currentInstruction in instructions)
@@ -70,11 +67,11 @@ namespace LevelUp
                 if (currentInstruction.opcode == OpCodes.Stfld && currentInstruction.operand as FieldInfo == SkillRecordLevelInt)
                 {
                     MethodBase onLevelChangeMethod = null;
-                    if (previousInstruction.opcode == OpCodes.Add && ModSettings.DoLevelUp)
+                    if (previousInstruction.opcode == OpCodes.Add && gameHandler.LevelUpInfo.Active)
                     {
                         onLevelChangeMethod = OnLevelUp;
                     }
-                    else if (previousInstruction.opcode == OpCodes.Sub && ModSettings.DoLevelDown)
+                    else if (previousInstruction.opcode == OpCodes.Sub && gameHandler.LevelDownInfo.Active)
                     {
                         onLevelChangeMethod = OnLevelDown;
                     }
