@@ -1,44 +1,20 @@
-﻿#if NET35
-
-using Harmony;
-using System.Collections.Generic;
-
-#elif NET472
-using HarmonyLib;
-#endif
-
+﻿using HarmonyLib;
 using System.Reflection;
 
 namespace LevelUp
 {
-    public class HarmonyPatcher : IPatcher
+    public class HarmonyTwoPatcher : IPatcher
     {
-#if NET35
-        private readonly HarmonyInstance harmony;
-
-        public HarmonyPatcher(string id)
-        {
-            this.harmony = HarmonyInstance.Create(id);
-        }
-
-#elif NET472
         private readonly Harmony harmony;
 
-        public HarmonyPatcher(string id)
+        public HarmonyTwoPatcher(string id)
         {
             this.harmony = new Harmony(id);
         }
-#endif
 
         public void ReApplyAllPatchesOn(MethodBase original)
         {
-#if NET35
-            var method = new List<MethodBase> { original };
-#elif NET472
-            var method = original;
-#endif
-
-            var patchProcessor = new PatchProcessor(this.harmony, method);
+            var patchProcessor = new PatchProcessor(this.harmony, original);
             patchProcessor.Patch();
         }
 

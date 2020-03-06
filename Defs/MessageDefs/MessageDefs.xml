@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Defs>
-
-  <LevelUp.MessageDef>
-    <defName>KrafsLevelUpMessageTopLeftSimple</defName>
-    <label>top left message</label>
-    <workerClass>LevelUp.MessageWorker_SimpleMessage</workerClass>
-  </LevelUp.MessageDef>
-</Defs>

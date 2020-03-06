@@ -43,8 +43,8 @@ namespace LevelUp
                         yield return new CodeInstruction(OpCodes.Ldarg_0);
                         yield return new CodeInstruction(OpCodes.Ldarg_0);
                         yield return new CodeInstruction(OpCodes.Ldfld, pawnField);
-                        yield return new CodeInstruction(OpCodes.Ldarg_0);
-                        yield return new CodeInstruction(OpCodes.Ldfld, levelField);
+                        //yield return new CodeInstruction(OpCodes.Ldarg_0);
+                        //yield return new CodeInstruction(OpCodes.Ldfld, levelField);
                         yield return new CodeInstruction(OpCodes.Call, onLevelChangeMethod);
                     }
                 }

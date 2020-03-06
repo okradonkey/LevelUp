@@ -2,6 +2,7 @@
 <LanguageInfo>
   <friendlyNameNative>English</friendlyNameNative>
   <friendlyNameEnglish>English</friendlyNameEnglish>
+  <canBeTiny>true</canBeTiny>
   <languageWorkerClass>LanguageWorker_English</languageWorkerClass>
   <credits>
     <li Class="CreditRecord_Role">
