@@ -8,9 +8,18 @@ namespace LevelUp
         public SubEffecter_Message(SubEffecterDef subDef, Effecter parent) : base(subDef, parent)
         { }
 
-        protected override void TryTrigger(TargetInfo target, string text)
+        protected override void TryTrigger(TargetInfo target, SkillRecord skillRecord, string languageKey)
         {
-            var message = new Message(text, MessageTypeDefOf.SilentInput, target);
+            var text = languageKey.Translate(target.Thing, skillRecord.Level, skillRecord.def.LabelCap);
+            string fixedText;
+#if NET472
+            fixedText = text.Resolve();
+
+#else
+            fixedText = text;
+
+#endif
+            var message = new Message(fixedText, MessageTypeDefOf.SilentInput, target);
             Messages.Message(message, false);
         }
     }

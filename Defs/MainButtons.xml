@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <MainButtonDef>
+    <defName>KrafsLevelUpMainWindow</defName>
+    <label>level up</label>
+    <description>Set effect for level ups</description>
+    <workerClass>LevelUp.MainButtonWorker_LevelUp</workerClass>
+    <order>75</order>
+  </MainButtonDef>
+</Defs>

@@ -9,6 +9,7 @@ namespace LevelUp
         public override void FinalizeInit()
         {
             LevelIntervalSeconds = 0;
+            ShowTabOnlyInDevMode = false;
 
             if (LevelUpInfo is null)
             {
@@ -27,7 +28,7 @@ namespace LevelUp
             }
 
             var pawnSkillTimerCache = new PawnSkillTimerCache(25, this);
-            LevelEventMaker = new LevelEventMaker(pawnSkillTimerCache, this);
+            LevelEventMaker = new LevelEventListener(pawnSkillTimerCache, this);
 
             if (harmonyPatcher is null)
             {
@@ -58,8 +59,9 @@ namespace LevelUp
         public LevelingInfo LevelDownInfo;
 
         public int LevelIntervalSeconds;
+        public bool ShowTabOnlyInDevMode;
 
-        public LevelEventMaker LevelEventMaker { get; private set; }
+        public LevelEventListener LevelEventMaker { get; private set; }
 
         public GameHandler(Game _)
         { }

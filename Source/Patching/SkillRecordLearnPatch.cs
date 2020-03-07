@@ -8,18 +8,19 @@ namespace LevelUp
     {
         private static IPatcher patcher;
         private static readonly MethodBase original = typeof(SkillRecord).GetMethod(nameof(SkillRecord.Learn));
-        private static LevelEventMaker LevelEventMaker => Current.Game.GetComponent<GameHandler>().LevelEventMaker;
+        private static LevelEventListener LevelEventMaker => Current.Game.GetComponent<GameHandler>().LevelEventMaker;
         private static readonly MethodBase levelEventMakerGetter = typeof(SkillRecordLearnPatch).GetProperty(nameof(LevelEventMaker), BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.GetProperty).GetGetMethod(true);
 
-        private static readonly MethodBase onLevelUp = typeof(LevelEventMaker).GetMethod(nameof(LevelEventMaker.OnLevelUp));
+        private static readonly MethodBase onLevelUp = typeof(LevelEventListener).GetMethod(nameof(LevelEventMaker.OnLevelUp));
 
-        private static readonly MethodBase onLevelDown = typeof(LevelEventMaker).GetMethod(nameof(LevelEventMaker.OnLevelDown));
+        private static readonly MethodBase onLevelDown = typeof(LevelEventListener).GetMethod(nameof(LevelEventMaker.OnLevelDown));
 
         private static readonly FieldInfo levelField = typeof(SkillRecord).GetField(nameof(SkillRecord.levelInt));
         private static readonly FieldInfo pawnField = typeof(SkillRecord).GetField("pawn", BindingFlags.NonPublic | BindingFlags.Instance);
 
         public static void ReApplyPatch()
         {
+            Log.Message("ReApplyPatch");
             patcher.ReApplyAllPatchesOn(original);
         }
 

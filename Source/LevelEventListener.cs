@@ -4,12 +4,12 @@ using Verse;
 
 namespace LevelUp
 {
-    public class LevelEventMaker
+    public class LevelEventListener
     {
         private readonly PawnSkillTimerCache pawnSkillTimerCache;
         private readonly GameHandler gameHandler;
 
-        public LevelEventMaker(PawnSkillTimerCache pawnSkillTimerCache, GameHandler gameHandler)
+        public LevelEventListener(PawnSkillTimerCache pawnSkillTimerCache, GameHandler gameHandler)
         {
             this.pawnSkillTimerCache = pawnSkillTimerCache;
             this.gameHandler = gameHandler;
@@ -33,9 +33,11 @@ namespace LevelUp
                 //var text = TextModifier.Replace(levelingInfo.MessageKey, skillRecord, pawn, skillRecord.Level);
                 //var effect = levelingInfo.Effect.Spawn();
 
-                var text = levelingInfo.MessageKey.Translate(pawn.LabelShortCap.Colorize(GUIStuff.PawnName), skillRecord.Level, skillRecord.def.LabelCap);
-                var textHolder = new TextHolderThing(text);
-                levelingInfo.Effect.Spawn().Trigger(pawn, textHolder);
+                //var text = levelingInfo.MessageKey.Translate(pawn.LabelShortCap.Colorize(GUIStuff.PawnName), skillRecord.Level, skillRecord.def.LabelCap);
+                //var textHolder = new TextHolderThing(text);
+                //levelingInfo.Effect.Spawn().Trigger(pawn, textHolder);
+
+                LevelActionTrigger.Trigger(levelingInfo, skillRecord, pawn);
             }
         }
     }

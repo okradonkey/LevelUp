@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <EffecterDef>
+  <LevelUp.LevelingDef>
     <defName>Effecter_LevelUpBubble</defName>
+    <label>bubble</label>
     <children>
       <li>
         <subEffecterClass>LevelUp.SubEffecter_Message</subEffecterClass>
@@ -18,10 +19,11 @@
         <spawnLocType>OnSource</spawnLocType>
       </li>
     </children>
-  </EffecterDef>
+  </LevelUp.LevelingDef>
 
-  <EffecterDef>
+  <LevelUp.LevelingDef>
     <defName>Effecter_LevelDownRedSpiral</defName>
+    <label>red spiral</label>
     <children>
       <li>
         <subEffecterClass>LevelUp.SubEffecter_Message</subEffecterClass>
@@ -38,5 +40,5 @@
         <spawnLocType>OnSource</spawnLocType>
       </li>
     </children>
-  </EffecterDef>
+  </LevelUp.LevelingDef>
 </Defs>

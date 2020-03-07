@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using RimWorld;
+using Verse;
 
 namespace LevelUp
 {
@@ -7,13 +8,14 @@ namespace LevelUp
         public SubEffecter_InjectedText(SubEffecterDef subDef, Effecter parent) : base(subDef, parent)
         { }
 
-        public override void SubTrigger(TargetInfo target, TargetInfo labelHolderThing)
+        public override void SubTrigger(TargetInfo target, TargetInfo disguisedLevelingParms)
         {
-            TryTrigger(target, labelHolderThing.Thing.Label);
+            var levelingParms = disguisedLevelingParms.Thing as LevelingParms;
+            var skillRecord = levelingParms?.skillRecord;
+            var languageKey = levelingParms?.languageKey;
+            TryTrigger(target, skillRecord, languageKey);
         }
 
-        protected virtual void TryTrigger(TargetInfo target, string text)
-        {
-        }
+        protected abstract void TryTrigger(TargetInfo target, SkillRecord skillRecord, string languageKey);
     }
 }

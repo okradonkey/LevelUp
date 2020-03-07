@@ -30,10 +30,12 @@ namespace LevelUp
                     MethodBase onLevelChangeMethod = null;
                     if (previousInstruction.opcode == OpCodes.Add && gameHandler.LevelUpInfo.Active)
                     {
+                        Log.Message("SkillRecordLearnPatch::gameHandler.LevelUpInfo.Active::" + gameHandler.LevelUpInfo.Active.ToString());
                         onLevelChangeMethod = onLevelUp;
                     }
                     else if (previousInstruction.opcode == OpCodes.Sub && gameHandler.LevelDownInfo.Active)
                     {
+                        Log.Message("SkillRecordLearnPatch::gameHandler.LevelDownInfo.Active::" + gameHandler.LevelDownInfo.Active.ToString());
                         onLevelChangeMethod = onLevelDown;
                     }
 

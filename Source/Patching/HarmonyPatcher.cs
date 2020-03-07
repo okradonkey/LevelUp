@@ -8,6 +8,7 @@ using HarmonyLib;
 #endif
 
 using System.Reflection;
+using Verse;
 
 namespace LevelUp
 {
@@ -37,7 +38,7 @@ namespace LevelUp
 #elif NET472
             var method = original;
 #endif
-
+            Log.Message("HarmonyPatcher::ReApplyAllPatchesOn");
             var patchProcessor = new PatchProcessor(this.harmony, method);
             patchProcessor.Patch();
         }
