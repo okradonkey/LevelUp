@@ -16,7 +16,6 @@
         <subEffecterClass>SubEffecter_DrifterEmoteTriggered</subEffecterClass>
         <moteDef>Mote_LevelUp</moteDef>
         <rotationRate>100</rotationRate>
-        <spawnLocType>OnSource</spawnLocType>
       </li>
     </children>
   </LevelUp.LevelingDef>
@@ -35,9 +34,8 @@
       <li>
         <subEffecterClass>SubEffecter_DrifterEmoteTriggered</subEffecterClass>
         <moteDef>Mote_LevelDown</moteDef>
-        <rotationRate>-100</rotationRate>
+        <rotationRate>-10</rotationRate>
         <scale>6.0</scale>
-        <spawnLocType>OnSource</spawnLocType>
       </li>
     </children>
   </LevelUp.LevelingDef>

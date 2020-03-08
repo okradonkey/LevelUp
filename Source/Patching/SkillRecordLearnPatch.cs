@@ -6,7 +6,7 @@ namespace LevelUp
 {
     public static partial class SkillRecordLearnPatch
     {
-        private static IPatcher patcher;
+        private static HarmonyPatcher patcher;
         private static readonly MethodBase original = typeof(SkillRecord).GetMethod(nameof(SkillRecord.Learn));
         private static LevelEventListener LevelEventMaker => Current.Game.GetComponent<GameHandler>().LevelEventMaker;
         private static readonly MethodBase levelEventMakerGetter = typeof(SkillRecordLearnPatch).GetProperty(nameof(LevelEventMaker), BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.GetProperty).GetGetMethod(true);
@@ -20,11 +20,10 @@ namespace LevelUp
 
         public static void ReApplyPatch()
         {
-            Log.Message("ReApplyPatch");
             patcher.ReApplyAllPatchesOn(original);
         }
 
-        public static void InitializePatch(IPatcher harmonyPatcher)
+        public static void InitializePatch(HarmonyPatcher harmonyPatcher)
         {
             patcher = harmonyPatcher;
 

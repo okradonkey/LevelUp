@@ -5,12 +5,12 @@ using Verse;
 
 namespace LevelUp
 {
-    public class PawnSkillTimerCache
+    public class PawnSkillTimer
     {
         private readonly Dictionary<Pair<Pawn, SkillDef>, DateTime> timerCache;
         private readonly GameHandler gameHandler;
 
-        public PawnSkillTimerCache(int capacity, GameHandler gameHandler)
+        public PawnSkillTimer(int capacity, GameHandler gameHandler)
         {
             this.timerCache = new Dictionary<Pair<Pawn, SkillDef>, DateTime>(capacity);
             this.gameHandler = gameHandler;

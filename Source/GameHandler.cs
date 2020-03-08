@@ -27,13 +27,13 @@ namespace LevelUp
                 LevelDownInfo.MessageKey = "Krafs.LevelUp.LevelDownMessage";
             }
 
-            var pawnSkillTimerCache = new PawnSkillTimerCache(25, this);
-            LevelEventMaker = new LevelEventListener(pawnSkillTimerCache, this);
+            var pawnSkillTimer = new PawnSkillTimer(25, this);
+            LevelEventMaker = new LevelEventListener(pawnSkillTimer, this);
 
             if (harmonyPatcher is null)
             {
                 var harmonyId = "Krafs.LevelUp";
-                IPatcher harmonyPatcher;
+                HarmonyPatcher harmonyPatcher;
                 // CANNOT GET MSBUILD TO CONDITIONALLY IGNORE.
 #if false
                 harmonyPatcher = new HarmonyOnePatcher(harmonyId);
@@ -53,7 +53,7 @@ namespace LevelUp
 
         public static IPatcher harmonyPatcher;
 
-        // Turn into properties
+        // Turn into properties?
         public LevelingInfo LevelUpInfo;
 
         public LevelingInfo LevelDownInfo;
@@ -87,19 +87,14 @@ namespace LevelUp
             var map = Find.CurrentMap;
             var pawn = map.mapPawns.FreeColonists.FirstOrFallback();
             var skill = pawn.skills.skills.First(x => !(x is null));
-            if (Widgets.ButtonText(new Rect(20f, y, 250f, 24f), $"Level up {pawn.LabelShortCap} in {skill.def.LabelCap}"))
+            if (Widgets.ButtonText(new Rect(20f, y, 300f, 24f), $"Level up {pawn.LabelShortCap} in {skill.def.LabelCap}"))
             {
                 skill.Learn(skill.XpRequiredForLevelUp * 1.2f, true);
             }
             y += 30f;
-            if (Widgets.ButtonText(new Rect(20f, y, 250f, 24f), $"Level down {pawn.LabelShortCap} in {skill.def.LabelCap}"))
+            if (Widgets.ButtonText(new Rect(20f, y, 300f, 24f), $"Level down {pawn.LabelShortCap} in {skill.def.LabelCap}"))
             {
                 skill.Learn(-skill.xpSinceLastLevel * 1.2f, true);
-            }
-            y += 30f;
-            if (Widgets.ButtonText(new Rect(20f, y, 250f, 24f), "Level Manager Window"))
-            {
-                Find.WindowStack.Add(new LevelManagerWindow());
             }
 
             y += 30f;

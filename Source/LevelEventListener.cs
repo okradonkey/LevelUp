@@ -6,12 +6,12 @@ namespace LevelUp
 {
     public class LevelEventListener
     {
-        private readonly PawnSkillTimerCache pawnSkillTimerCache;
+        private readonly PawnSkillTimer pawnSkillTimer;
         private readonly GameHandler gameHandler;
 
-        public LevelEventListener(PawnSkillTimerCache pawnSkillTimerCache, GameHandler gameHandler)
+        public LevelEventListener(PawnSkillTimer pawnSkillTimer, GameHandler gameHandler)
         {
-            this.pawnSkillTimerCache = pawnSkillTimerCache;
+            this.pawnSkillTimer = pawnSkillTimer;
             this.gameHandler = gameHandler;
         }
 
@@ -27,24 +27,10 @@ namespace LevelUp
 
         public void OnLevelChange(LevelingInfo levelingInfo, SkillRecord skillRecord, Pawn pawn)
         {
-            if (pawn.IsFreeColonist && this.pawnSkillTimerCache.EnoughTimeHasPassed(pawn, skillRecord.def))
+            if (pawn.IsFreeColonist && this.pawnSkillTimer.EnoughTimeHasPassed(pawn, skillRecord.def))
             {
-                //var effecterDef = DefDatabase<EffecterDef>.GetNamed("Effecter_LevelUp");
-                //var text = TextModifier.Replace(levelingInfo.MessageKey, skillRecord, pawn, skillRecord.Level);
-                //var effect = levelingInfo.Effect.Spawn();
-
-                //var text = levelingInfo.MessageKey.Translate(pawn.LabelShortCap.Colorize(GUIStuff.PawnName), skillRecord.Level, skillRecord.def.LabelCap);
-                //var textHolder = new TextHolderThing(text);
-                //levelingInfo.Effect.Spawn().Trigger(pawn, textHolder);
-
                 LevelActionTrigger.Trigger(levelingInfo, skillRecord, pawn);
             }
         }
     }
 }
-
-//levelingInfo.Animation.Worker.Execute(pawn);
-//levelingInfo.Message.Worker.Execute(text, pawn);
-//var soundInfo = SoundInfo.OnCamera(MaintenanceType.None);
-//soundInfo.volumeFactor = levelingInfo.Volume;
-//levelingInfo.Sound.PlayOneShot(soundInfo); // Remake this into soundworker?

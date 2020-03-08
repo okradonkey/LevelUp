@@ -3,23 +3,20 @@ using Verse;
 
 namespace LevelUp
 {
-    public class SubEffecter_Message : SubEffecter_InjectedText
+    public class SubEffecter_Message : SubEffecter_Text
     {
         public SubEffecter_Message(SubEffecterDef subDef, Effecter parent) : base(subDef, parent)
         { }
 
         protected override void TryTrigger(TargetInfo target, SkillRecord skillRecord, string languageKey)
         {
-            var text = languageKey.Translate(target.Thing, skillRecord.Level, skillRecord.def.LabelCap);
-            string fixedText;
+            var text = languageKey.Translate(target.Thing, skillRecord.Level, skillRecord.def)
 #if NET472
-            fixedText = text.Resolve();
-
-#else
-            fixedText = text;
-
+                .Resolve()
 #endif
-            var message = new Message(fixedText, MessageTypeDefOf.SilentInput, target);
+                ;
+
+            var message = new Message(text, MessageTypeDefOf.SilentInput, target);
             Messages.Message(message, false);
         }
     }

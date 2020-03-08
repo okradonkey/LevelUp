@@ -3,6 +3,8 @@
   <MainButtonDef>
     <defName>KrafsLevelUpMainWindow</defName>
     <label>level up</label>
+    <iconPath>LevelUp/UI/PlusOneIcon</iconPath>
+    <minimized>True</minimized>
     <description>Set effect for level ups</description>
     <workerClass>LevelUp.MainButtonWorker_LevelUp</workerClass>
     <order>75</order>

@@ -12,7 +12,7 @@ using Verse;
 
 namespace LevelUp
 {
-    public class HarmonyPatcher : IPatcher
+    public class HarmonyPatcher
     {
 #if NET35
         private readonly HarmonyInstance harmony;
@@ -38,7 +38,7 @@ namespace LevelUp
 #elif NET472
             var method = original;
 #endif
-            Log.Message("HarmonyPatcher::ReApplyAllPatchesOn");
+
             var patchProcessor = new PatchProcessor(this.harmony, method);
             patchProcessor.Patch();
         }
