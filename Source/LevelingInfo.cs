@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace LevelUp
@@ -22,7 +23,7 @@ namespace LevelUp
                 if (this.menu is null)
                 {
                     var options = new List<FloatMenuOption>();
-                    foreach (var def in DefDatabase<LevelingDef>.AllDefs)
+                    foreach (var def in DefDatabase<EffecterDef>.AllDefs.Where(x => x.HasModExtension<LevelUpModExtension>()))
                     {
                         options.Add(new FloatMenuOption(def.label.CapitalizeFirst(), () => this.Effect = def));
                     }

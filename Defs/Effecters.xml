@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <LevelUp.LevelingDef>
+  <EffecterDef Name="LevelUpEffect" Abstract="True">
+    <modExtensions>
+      <li Class="LevelUp.LevelUpModExtension" />
+    </modExtensions>
+  </EffecterDef>
+
+  <EffecterDef ParentName="LevelUpEffect">
     <defName>Effecter_LevelUpBubble</defName>
     <label>bubble</label>
     <children>
@@ -18,9 +24,9 @@
         <rotationRate>100</rotationRate>
       </li>
     </children>
-  </LevelUp.LevelingDef>
+  </EffecterDef>
 
-  <LevelUp.LevelingDef>
+  <EffecterDef ParentName="LevelUpEffect">
     <defName>Effecter_LevelDownRedSpiral</defName>
     <label>red spiral</label>
     <children>
@@ -38,5 +44,5 @@
         <scale>6.0</scale>
       </li>
     </children>
-  </LevelUp.LevelingDef>
+  </EffecterDef>
 </Defs>
