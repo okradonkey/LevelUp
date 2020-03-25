@@ -8,7 +8,6 @@ using HarmonyLib;
 #endif
 
 using System.Reflection;
-using Verse;
 
 namespace LevelUp
 {

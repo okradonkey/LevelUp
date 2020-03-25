@@ -9,7 +9,12 @@ namespace LevelUp
         public static void Trigger(LevelingInfo levelingInfo, SkillRecord skillRecord, Pawn pawn)
         {
             var levelingParms = new LevelingParms { skillRecord = skillRecord, languageKey = levelingInfo.MessageKey };
-            levelingInfo.Effect.Spawn().Trigger(pawn, levelingParms);
+            var effecter = levelingInfo.Effect.Spawn();
+            effecter.Trigger(pawn, levelingParms);
+            if (effecter.def is LevelingDef def && def.durationTicks > 0)
+            {
+                var tickQueue = Current.Game.GetComponent<GameHandler>().TickQueue;
+            }
         }
     }
 }

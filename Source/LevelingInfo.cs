@@ -8,13 +8,13 @@ namespace LevelUp
     {
         private bool active;
         private string messageKey;
-        private EffecterDef effect;
+        private LevelingDef effect;
         private FloatMenu menu;
 
         public ref bool Active => ref active;
         public ref string MessageKey => ref messageKey;
 
-        public ref EffecterDef Effect => ref effect;
+        public ref LevelingDef Effect => ref effect;
 
         public FloatMenu Menu
         {
@@ -23,7 +23,7 @@ namespace LevelUp
                 if (this.menu is null)
                 {
                     var options = new List<FloatMenuOption>();
-                    foreach (var def in DefDatabase<EffecterDef>.AllDefs.Where(x => x.HasModExtension<LevelUpModExtension>()))
+                    foreach (var def in DefDatabase<LevelingDef>.AllDefs.Where(x => x.HasModExtension<LevelUpModExtension>()))
                     {
                         options.Add(new FloatMenuOption(def.label.CapitalizeFirst(), () => this.Effect = def));
                     }

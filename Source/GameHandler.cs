@@ -15,7 +15,7 @@ namespace LevelUp
             {
                 LevelUpInfo = new LevelingInfo();
                 LevelUpInfo.Active = true;
-                LevelUpInfo.Effect = DefDatabase<EffecterDef>.GetNamed("Effecter_LevelUpBubble");
+                LevelUpInfo.Effect = DefDatabase<LevelingDef>.GetNamed("Effecter_LevelUpWIP");
                 LevelUpInfo.MessageKey = "Krafs.LevelUp.LevelUpMessage";
             }
 
@@ -23,25 +23,17 @@ namespace LevelUp
             {
                 LevelDownInfo = new LevelingInfo();
                 LevelDownInfo.Active = true;
-                LevelDownInfo.Effect = DefDatabase<EffecterDef>.GetNamed("Effecter_LevelDownRedSpiral");
+                LevelDownInfo.Effect = DefDatabase<LevelingDef>.GetNamed("Effecter_LevelDownRedSpiral");
                 LevelDownInfo.MessageKey = "Krafs.LevelUp.LevelDownMessage";
             }
 
+            TickQueue = new TickQueue();
             var pawnSkillTimer = new PawnSkillTimer(25, this);
             LevelEventMaker = new LevelEventListener(pawnSkillTimer, this);
 
             if (harmonyPatcher is null)
             {
-                var harmonyId = "Krafs.LevelUp";
-                HarmonyPatcher harmonyPatcher;
-                // CANNOT GET MSBUILD TO CONDITIONALLY IGNORE.
-#if false
-                harmonyPatcher = new HarmonyOnePatcher(harmonyId);
-#elif false
-                harmonyPatcher = new HarmonyTwoPatcher(harmonyId);
-#else
-                harmonyPatcher = new HarmonyPatcher(harmonyId);
-#endif
+                harmonyPatcher = new HarmonyPatcher("Krafs.LevelUp");
 
                 SkillRecordLearnPatch.InitializePatch(harmonyPatcher);
             }
@@ -51,7 +43,8 @@ namespace LevelUp
             }
         }
 
-        public static IPatcher harmonyPatcher;
+        private static HarmonyPatcher harmonyPatcher;
+        public TickQueue TickQueue;
 
         // Turn into properties?
         public LevelingInfo LevelUpInfo;
@@ -71,6 +64,10 @@ namespace LevelUp
             Scribe_Values.Look(ref LevelIntervalSeconds, nameof(LevelIntervalSeconds));
             Scribe_Deep.Look(ref LevelUpInfo, nameof(LevelUpInfo));
             Scribe_Deep.Look(ref LevelDownInfo, nameof(LevelDownInfo));
+        }
+
+        public override void GameComponentTick()
+        {
         }
 
 #if DEBUG

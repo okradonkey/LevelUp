@@ -1,13 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
+  <!--
   <EffecterDef Name="LevelUpEffect" Abstract="True">
     <modExtensions>
       <li Class="LevelUp.LevelUpModExtension" />
     </modExtensions>
   </EffecterDef>
+      -->
+  <LevelUp.LevelingDef>
+    <defName>Effecter_LevelUpWIP</defName>
+    <label>WIP</label>
+    <durationTicks>2000</durationTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>PickHit</soundDef>
+      </li>
+      <!--
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>Mote_SparkFlash</moteDef>
+        <spawnLocType>RandomCellOnTarget</spawnLocType>
+        <positionLerpFactor>0.49</positionLerpFactor>
+        <chancePerTick>0.2</chancePerTick>
+        <scale>2.5~3.5</scale>
+        <burstCount>5~10</burstCount>
+        <positionRadius>1</positionRadius>
+      </li>
+      -->
+      <li>
+        <subEffecterClass>SubEffecter_DrifterEmoteTriggered</subEffecterClass>
+        <moteDef>Mote_SparkFlash</moteDef>
+        <spawnLocType>BetweenTouchingCells</spawnLocType>
+        <positionLerpFactor>0.6</positionLerpFactor>
+        <chancePerTick>100</chancePerTick>
+        <scale>1.0~3.0</scale>
+        <burstCount>5~10</burstCount>
+        <positionRadius>1</positionRadius>
+      </li>
+    </children>
+  </LevelUp.LevelingDef>
 
-  <EffecterDef ParentName="LevelUpEffect">
+  <LevelUp.LevelingDef>
     <defName>Effecter_LevelUpBubble</defName>
     <label>bubble</label>
     <children>
@@ -24,9 +58,9 @@
         <rotationRate>100</rotationRate>
       </li>
     </children>
-  </EffecterDef>
+  </LevelUp.LevelingDef>
 
-  <EffecterDef ParentName="LevelUpEffect">
+  <LevelUp.LevelingDef>
     <defName>Effecter_LevelDownRedSpiral</defName>
     <label>red spiral</label>
     <children>
@@ -44,5 +78,5 @@
         <scale>6.0</scale>
       </li>
     </children>
-  </EffecterDef>
+  </LevelUp.LevelingDef>
 </Defs>
